@@ -1,0 +1,112 @@
+
+main {
+  border: solid rgb(182, 178, 174); 
+  border-radius: 2pc;
+  background-color: rgb(236, 231, 231);
+  width: 90vw;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#container {
+  position: center;
+  margin: 70px auto 50px auto;
+  width: 60%;
+  height: auto;
+  border: 1px solid purple;
+  border-radius: 2pc;
+}
+
+#start {
+  margin: 50px auto 50px auto;
+  width: 80%;background-color: rgb(231, 225, 231);
+  text-align: center;
+  line-height: 1.5;
+}
+
+#startquiz {
+  background-color: rgb(59, 4, 59);
+  padding: 15px 32px;
+  font-size: 20px;
+  color: white;
+  border-radius: 1pc;
+}
+
+#q-space {
+  margin: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;background-color: rgb(231, 225, 231);
+}
+
+#timer, #timesup {
+  margin: 30px 30px ;
+  float: right;
+}
+
+#viewHighScore {
+  margin: 30px 30px ;
+  float: left;
+}
+
+#summary, #h-score-space {
+  margin: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;background-color: rgb(231, 225, 231);
+}
+
+.btn {
+  background-color: rgb(59, 4, 59);
+  
+  padding: 5px 5px;
+  font-size: 18px;
+  color: white;
+  border-radius: .5pc;
+}
+
+h1, 
+h2 {
+  color: #313740;
+  font-family: 'Montserrat', sans-serif;
+}
+
+a {
+  color: #3290A6;
+  font-family: 'Archivo', sans-serif;
+}
+
+a:hover {
+  color: #99B8BF;
+  font-family: 'Archivo', sans-serif;
+}
+
+.btn:focus, .btn:active, .btn:visited {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: #343a40;
+}
+
+#finalScore {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+
+span {
+  font-family: 'Archivo', sans-serif;
+}
+
+p {
+  font-family: 'Archivo', sans-serif;
+}
+
+#questionTitle {
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#answerCheck {
+  font-style: italic;
+  color: #4D5159;
+}
