@@ -11,7 +11,7 @@
 <body>
   <!-- main content -->
   <main>      
-      <a href="#" id="viewHighScore">View High Scores</a>
+      <button type="submit" class="btn" id="highScore">Score History</button>
       
       <div id="timer">
           <i class="counter"></i> Time: <span id="timeLeft">0</span>
@@ -21,8 +21,9 @@
             <div class="col-md-8 mt-5">
                 <!-- STarting the quiz -->
                 <div id="start">
-                    <h1>Coding Quiz</h1>
-                    <p> The is a multiple choice test in coding. The countdown timer will start at 76 seconds. For every incorrect response, you will lose 10 seconds off the timer. The final score will be the time left after you finish!</p>
+                    <img src="assets/theoffice.jpeg">
+                    <h1>Fast Fingers Quiz</h1>
+                    <p> The is a timed multiple choice quiz on the famous American series, The Office. The countdown timer will start at 76 seconds. For every incorrect response, you will lose 15 seconds off the timer. Work as fast as you can!</p>
                     <button type="button" id="startquiz">Let's Go!</button>
                 </div>
 
@@ -33,7 +34,6 @@
                       <p><button id="btn1" class="btn"></button></p>
                       <p><button id="btn2" class="btn"></button></p>
                       <p><button id="btn3" class="btn"></button></p>
-                      <hr id="lineBreak">
                       <p id="answerCheck"></p>
                 </div>
 
@@ -50,15 +50,14 @@
               </div>
 
               <!-- highscores section -->
-              <div id="h-score-space" style="display: none;">
-                  <h2>High Scores</h2>                   
-                  
-                  <div id="listOfHighScores"></div>
+              <div id="scorespace" style="display: none;">
+                  <h2>Scores History</h2>                  
+                  <div id="scoreslist"></div>
 
                   <!-- append each highscore as new paragraph here -->
                   <p>
-                      <button type="submit" class="btn" id="goBackBtn">Go Back</button>
-                      <button type="submit" class="btn" id="clearHighScoreBtn">Clear High Scores</button>
+                      <button type="submit" class="btn" id="backBtn">Take the quiz again</button>
+                      <button type="submit" class="btn" id="dltHistoryBtn">Delete scores history</button>
                   </p>
                   
               </div>

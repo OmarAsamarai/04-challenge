@@ -1,57 +1,34 @@
-/** 
- * Criteria 
- */
 
-// GIVEN I am taking a code quiz
-// WHEN I click the start button
-// THEN a timer starts and I am presented with a question
-// WHEN I answer a question
-// THEN I am presented with another question
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over
-// THEN I can save my initials and score
-
-/** 
- * DEFINE VARIABLES 
- */
-
- // Define a set of questions
+ // The questions about (the office)
  var questions = [
   {
-      question: "Inside which HTML element do we put the JavaScript?",
-      choices: ["a. <js>", "b. <javascript>", "c. <scripting>", "d. <script>"],
-      answer: "d. <script>"
+      question: "What is Pam's favorite yogurt flavor?",
+      choices: ["a. plain", "b. fat free", "c. strawberry", "d. mixed berry"],
+      answer: "d. mixed berry"
   },
   {
-      question: "String values must be enclosed within _____ when being assigned to variables.",
-      choices: ["a. commas", "b. curly brackets", "c. quotes", "d. parenthesis"],
-      answer: "c. quotes"
+      question: " Which of Angela's cat's does Dwight freeze?",
+      choices: ["a. Simon", "b. Sprinkles", "c. Princess", "b. Bandit "],
+      answer: "b. Sprinkles"
   },
   {
-      question: "Arrays in JavaScript can be used to store _____.",
-      choices: ["a. numbers and strings", "b. other arrays", "c. booleans", "d. all of the above"],
-      answer: "b. other arrays"
+      question: "Who can raise and lower their cholesterol at will?",
+      choices: ["a. Creed", "b. Dwight", "c. Gabe", "d. Jim"],
+      answer: "b. Dwight"
   },
   {
-      question: "Commonly used data types DO NOT include:",
-      choices: ["a. strings", "b. booleans", "c. alerts", "d. numbers"],
-      answer: "c. alerts"
+      question: " What was the name of Jim and Pam's son?",
+      choices: ["a. Phillip", "b. Peter", "c. Carson", "d. David"],
+      answer: "a. Phillip"
   },
   {
-      question: "How do you create a function in JavaScript",
-      choices: ["a. function = myFunction()", "b. function myFunction()", "c. function:myFunction()", "d. createMyFunction()"],
-      answer: "b. function myFunction()"
+      question: "What cause does Michael use for Fun Run?",
+      choices: ["a. Cancer", "b. Freedom", "c. Rabies", "d. Love"],
+      answer: "c. Rabies"
   }
 ];
 
-// grab references to elements
-var timer = document.getElementById("timer");
-var timeLeft = document.getElementById("timeLeft");
-var timesUp = document.getElementById("timesup");
-
+// Definition of Variables
 var startDiv = document.getElementById("start");
 var startBtn = document.getElementById("startquiz");
 
@@ -63,29 +40,31 @@ var choiceC = document.getElementById("btn2");
 var choiceD = document.getElementById("btn3");
 var answerCheck = document.getElementById("answerCheck");
 
+var timer = document.getElementById("timer");
+var timeLeft = document.getElementById("timeLeft");
+var timesUp = document.getElementById("timesup");
+
+var highScoreSection = document.getElementById("scorespace");
+var finalScore = document.getElementById("finalScore");
+
 var summary = document.getElementById("summary");
 var submitInitialBtn = document.getElementById("submitInitialBtn");
 var initialInput = document.getElementById("initialInput");
 var everything = document.getElementById("everything");
 
-var highScoreSection = document.getElementById("h-score-space");
-var finalScore = document.getElementById("finalScore");
-
-var goBackBtn = document.getElementById("goBackBtn");
-var clearHighScoreBtn = document.getElementById("clearHighScoreBtn"); 
-var viewHighScore = document.getElementById("viewHighScore");
-var listOfHighScores = document.getElementById("listOfHighScores");
+var backBtn = document.getElementById("backBtn");
+var dltHistoryBtn = document.getElementById("dltHistoryBtn"); 
+var scoresHisBtn = document.getElementById("highScore");
+var listOfHighScores = document.getElementById("scoreslist");
 
 // define other variables
 var correctAns = 0;
 var questionNum = 0;
 var scoreResult;
 var questionIndex = 0;
-var penalty = 10;
+var penalty = 15;
 
-/**
-* FUNCTIONS
-*/
+// FUNCTIONS
 
 // WHEN I click the start button, timer starts
 startBtn.addEventListener("click", function() {
@@ -118,31 +97,27 @@ startBtn.addEventListener("click", function() {
 
 // then presented with questions and choices
 function renderQuiz() {
+  
   nextQuestion();
 }
-
 function nextQuestion() {
   questionTitle.textContent = questions[questionIndex].question;
   choiceA.textContent = questions[questionIndex].choices[0];
   choiceB.textContent = questions[questionIndex].choices[1];
   choiceC.textContent = questions[questionIndex].choices[2];
   choiceD.textContent = questions[questionIndex].choices[3];
+ 
+
 }
 
 // after question is answered, show if correct or wrong
 function checkAnswer(answer) {
-
-  var lineBreak = document.getElementById("lineBreak");
-  lineBreak.style.display = "flex";
-  answerCheck.style.display = "flex";
+  answerCheck.style.display = "blok";
 
   if (questions[questionIndex].answer === questions[questionIndex].choices[answer]) {
-      // correct answer, add 1 score to final score
-      //correctAns++;
-      // console.log(correctAns);
       answerCheck.textContent = "Correct!";
   } else {
-      // wrong answer, deduct 10 second from timer
+      // If the answer if wrong, 15 second penalty will be deducted from the timeTotal time will be deducted by amout of penalty ()
       totalTime -=penalty;
       timeLeft.textContent = totalTime;
       answerCheck.textContent = "Wrong! The correct answer is: " + questions[questionIndex].answer;
@@ -175,11 +150,15 @@ function gameOver() {
   timesUp.style.display = "block";
 
   // show final score
-  finalScore.textContent = totalTime;
+  if (totalTime < 0) {
+    finalScore.textContent = 0;
+  } else {
+      finalScore.textContent = totalTime;
+  }  
 }
 
 // enter initial and store highscore in local storage
-function storeHighScores(event) {
+function storeScores(event) {
   event.preventDefault();
 
   // stop function is initial is blank
@@ -217,12 +196,12 @@ function storeHighScores(event) {
   window.localStorage.setItem("high scores", scoresArrayString);
   
   // show current highscores
-  showHighScores();
+  renderHighScores();
 }
 
 // function to show high scores
 var i = 0;
-function showHighScores() {
+function renderHighScores() {
 
   startDiv.style.display = "none";
   timer.style.display = "none";
@@ -248,10 +227,7 @@ function showHighScores() {
   }
 }
 
-/**
-* ADD EVENT LISTENERS
-*/
-
+// ADD EVENT LISTENERS
 
 choiceA.addEventListener("click", chooseA);
 choiceB.addEventListener("click", chooseB);
@@ -259,20 +235,20 @@ choiceC.addEventListener("click", chooseC);
 choiceD.addEventListener("click", chooseD);
 
 submitInitialBtn.addEventListener("click", function(event){ 
-  storeHighScores(event);
+  storeScores(event);
 });
 
-viewHighScore.addEventListener("click", function(event) { 
-  showHighScores(event);
+scoresHisBtn.addEventListener("click", function(event) { 
+  renderHighScores(event);
 });
 
-goBackBtn.addEventListener("click", function() {
+backBtn.addEventListener("click", function() {
   startDiv.style.display = "block";
   highScoreSection.style.display = "none";
 });
 
-clearHighScoreBtn.addEventListener("click", function(){
+dltHistoryBtn.addEventListener("click", function(){
   window.localStorage.removeItem("high scores");
-  listOfHighScores.innerHTML = "High Scores Cleared!";
+  listOfHighScores.innerHTML = "History of scores deleted!";
   listOfHighScores.setAttribute("style", "font-family: 'Archivo', sans-serif; font-style: italic;")
 });

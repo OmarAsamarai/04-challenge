@@ -2,11 +2,10 @@
 main {
   border: solid rgb(182, 178, 174); 
   border-radius: 2pc;
-  background-color: rgb(236, 231, 231);
+  background-color: rgba(236, 231, 231, 0.452);
   width: 90vw;
   height: auto;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 20px auto 0 auto;
 }
 
 #container {
@@ -14,19 +13,29 @@ main {
   margin: 70px auto 50px auto;
   width: 60%;
   height: auto;
-  border: 1px solid purple;
+  border: 5px solid rgb(255, 254, 254);
   border-radius: 2pc;
 }
 
 #start {
-  margin: 50px auto 50px auto;
-  width: 80%;background-color: rgb(231, 225, 231);
+  margin: 20px auto 20px auto;
+  width: 80%;
   text-align: center;
   line-height: 1.5;
 }
 
+#start h1 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 28px;
+}
+
+img {
+  width: 50%;
+  height: auto;
+}
+
 #startquiz {
-  background-color: rgb(59, 4, 59);
+  background-color: rgb(79, 122, 97);
   padding: 15px 32px;
   font-size: 20px;
   color: white;
@@ -37,76 +46,57 @@ main {
   margin: 20px;
     margin-left: auto;
     margin-right: auto;
-    width: 80%;background-color: rgb(231, 225, 231);
+    width: 80%;
+}
+
+#questionTitle {
+  font-size: 20px;
+  font-family: arial, sans-serif;
+}
+
+#answerCheck {
+  color: #5f6469;
 }
 
 #timer, #timesup {
   margin: 30px 30px ;
   float: right;
+  border-bottom: solid rgba(3, 9, 20, 0.445);
+  border-radius: .5pc;
+  padding: 7px 30px 7px 30px;
+  background-color: rgb(79, 122, 97);
+  color: white;
 }
 
-#viewHighScore {
+#highScore {
   margin: 30px 30px ;
   float: left;
+  background-color: rgb(79, 122, 97);
 }
 
-#summary, #h-score-space {
+#summary, #scorespace {
   margin: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;background-color: rgb(231, 225, 231);
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  line-height: 1;
 }
 
 .btn {
-  background-color: rgb(59, 4, 59);
-  
+  background-color: rgb(79, 122, 97);
   padding: 5px 5px;
   font-size: 18px;
   color: white;
   border-radius: .5pc;
 }
 
-h1, 
-h2 {
-  color: #313740;
-  font-family: 'Montserrat', sans-serif;
-}
-
-a {
-  color: #3290A6;
-  font-family: 'Archivo', sans-serif;
-}
-
-a:hover {
-  color: #99B8BF;
-  font-family: 'Archivo', sans-serif;
-}
-
 .btn:focus, .btn:active, .btn:visited {
   outline: none !important;
   box-shadow: none !important;
-  background-color: #343a40;
+  background-color: #dbb610;
 }
 
 #finalScore {
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
-}
-
-span {
-  font-family: 'Archivo', sans-serif;
-}
-
-p {
-  font-family: 'Archivo', sans-serif;
-}
-
-#questionTitle {
-  font-size: 20px;
-  font-family: 'Montserrat', sans-serif;
-}
-
-#answerCheck {
-  font-style: italic;
-  color: #4D5159;
 }
