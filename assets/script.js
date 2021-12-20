@@ -29,10 +29,10 @@
 ];
 
 // Definition of Variables
-var startDiv = document.getElementById("start");
+var startNew = document.getElementById("start");
 var startBtn = document.getElementById("startquiz");
 
-var questionDiv = document.getElementById("q-space");
+var questionSec = document.getElementById("q-space");
 var questionTitle = document.getElementById("questionTitle");
 var choiceA = document.getElementById("btn0");
 var choiceB = document.getElementById("btn1");
@@ -44,37 +44,32 @@ var timer = document.getElementById("timer");
 var timeLeft = document.getElementById("timeLeft");
 var timesUp = document.getElementById("timesup");
 
-var highScoreSection = document.getElementById("scorespace");
+var scoreSection = document.getElementById("scorespace");
 var finalScore = document.getElementById("finalScore");
 
 var summary = document.getElementById("summary");
-var submitInitialBtn = document.getElementById("submitInitialBtn");
+var initialBtn = document.getElementById("initialBtn");
 var initialInput = document.getElementById("initialInput");
-var everything = document.getElementById("everything");
 
 var backBtn = document.getElementById("backBtn");
 var dltHistoryBtn = document.getElementById("dltHistoryBtn"); 
 var scoresHisBtn = document.getElementById("highScore");
-var listOfHighScores = document.getElementById("scoreslist");
+var listOfScores = document.getElementById("scoreslist");
 
-// define other variables
 var correctAns = 0;
 var questionNum = 0;
 var scoreResult;
 var questionIndex = 0;
 var penalty = 15;
 
-// FUNCTIONS
 
 // WHEN I click the start button, timer starts
 startBtn.addEventListener("click", function() {
   questionIndex = 0;
   totalTime = 76;
-  //timeLeft.textContent = totalTime;
-  //initialInput.textContent = "";
 
-  startDiv.style.display = "none";
-  questionDiv.style.display = "block";
+  startNew.style.display = "none";
+  questionSec.style.display = "block";
   timer.style.display = "block";
   timesUp.style.display = "none";
 
@@ -92,12 +87,8 @@ startBtn.addEventListener("click", function() {
   renderQuiz();
 });
 
-// console.log(questions[questionIndex].question);
-// console.log(questions[questionIndex].choices);
-
-// then presented with questions and choices
+// Showing questions and choices
 function renderQuiz() {
-  
   nextQuestion();
 }
 function nextQuestion() {
@@ -106,11 +97,9 @@ function nextQuestion() {
   choiceB.textContent = questions[questionIndex].choices[1];
   choiceC.textContent = questions[questionIndex].choices[2];
   choiceD.textContent = questions[questionIndex].choices[3];
- 
-
 }
 
-// after question is answered, show if correct or wrong
+// Showing the answer, correct or wrong
 function checkAnswer(answer) {
   answerCheck.style.display = "blok";
 
@@ -122,34 +111,31 @@ function checkAnswer(answer) {
       timeLeft.textContent = totalTime;
       answerCheck.textContent = "Wrong! The correct answer is: " + questions[questionIndex].answer;
   }
-
   questionIndex++;
-  // repeat with the rest of questions 
+
+  // If there are more questions, show them
   if (questionIndex < questions.length) {
       nextQuestion();
   } else {
-      // if no more question, run game over function
+      // If no more questions, game over
       gameOver();
   }
 }
 
 function chooseA() { checkAnswer(0); }
-
 function chooseB() { checkAnswer(1); }
-
 function chooseC() { checkAnswer(2); }
-
 function chooseD() { checkAnswer(3); }
 
-// when all questions are answered or timer reaches 0, game over
+// If the timer went dowon to zero, game over
 function gameOver() {
   summary.style.display = "block";
-  questionDiv.style.display = "none";
-  startDiv.style.display = "none";
+  questionSec.style.display = "none";
+  startNew.style.display = "none";
   timer.style.display = "none";
   timesUp.style.display = "block";
 
-  // show final score
+  // Show final score
   if (totalTime < 0) {
     finalScore.textContent = 0;
   } else {
@@ -157,30 +143,28 @@ function gameOver() {
   }  
 }
 
-// enter initial and store highscore in local storage
+// Ask for initial
 function storeScores(event) {
   event.preventDefault();
 
-  // stop function is initial is blank
   if (initialInput.value === "") {
-      //alert("Please enter your initials!");
       return;
   } 
 
-  startDiv.style.display = "none";
+  startNew.style.display = "none";
   timer.style.display = "none";
   timesUp.style.display = "none";
   summary.style.display = "none";
-  highScoreSection.style.display = "block";   
+  scoreSection.style.display = "block";   
 
   // store scores into local storage
-  var savedHighScores = localStorage.getItem("high scores");
+  var savedScores = localStorage.getItem("high scores");
   var scoresArray;
 
-  if (savedHighScores === null) {
+  if (savedScores === null) {
       scoresArray = [];
   } else {
-      scoresArray = JSON.parse(savedHighScores)
+      scoresArray = JSON.parse(savedScores)
   }
 
   var userScore = {
@@ -191,64 +175,62 @@ function storeScores(event) {
   console.log(userScore);
   scoresArray.push(userScore);
 
-  // stringify array in order to store in local
   var scoresArrayString = JSON.stringify(scoresArray);
   window.localStorage.setItem("high scores", scoresArrayString);
   
   // show current highscores
-  renderHighScores();
+  renderScores();
 }
 
 // function to show high scores
 var i = 0;
-function renderHighScores() {
+function renderScores() {
 
-  startDiv.style.display = "none";
+  startNew.style.display = "none";
   timer.style.display = "none";
-  questionDiv.style.display = "none";
+  questionSec.style.display = "none";
   timesUp.style.display = "none";
   summary.style.display = "none";
-  highScoreSection.style.display = "block";
+  scoreSection.style.display = "block";
 
-  var savedHighScores = localStorage.getItem("high scores");
+  // Save scores in local storage  
+  var savedScores = localStorage.getItem("high scores");
 
   // check if there is any in local storage
-  if (savedHighScores === null) {
+  if (savedScores === null) {
       return;
   }
-  console.log(savedHighScores);
+  console.log(savedScores);
 
-  var storedHighScores = JSON.parse(savedHighScores);
+  var storedScores = JSON.parse(savedScores);
 
-  for (; i < storedHighScores.length; i++) {
-      var eachNewHighScore = document.createElement("p");
-      eachNewHighScore.innerHTML = storedHighScores[i].initials + ": " + storedHighScores[i].score;
-      listOfHighScores.appendChild(eachNewHighScore);
+  for (; i < storedScores.length; i++) {
+      var eachNewScore = document.createElement("p");
+      eachNewScore.innerHTML = storedScores[i].initials + ": " + storedScores[i].score;
+      listOfScores.appendChild(eachNewScore);
   }
 }
-
-// ADD EVENT LISTENERS
 
 choiceA.addEventListener("click", chooseA);
 choiceB.addEventListener("click", chooseB);
 choiceC.addEventListener("click", chooseC);
 choiceD.addEventListener("click", chooseD);
 
-submitInitialBtn.addEventListener("click", function(event){ 
+initialBtn.addEventListener("click", function(event){ 
   storeScores(event);
 });
 
 scoresHisBtn.addEventListener("click", function(event) { 
-  renderHighScores(event);
+  renderScores(event);
 });
 
 backBtn.addEventListener("click", function() {
-  startDiv.style.display = "block";
-  highScoreSection.style.display = "none";
+  startNew.style.display = "block";
+  scoreSection.style.display = "none";
 });
 
 dltHistoryBtn.addEventListener("click", function(){
   window.localStorage.removeItem("high scores");
-  listOfHighScores.innerHTML = "History of scores deleted!";
-  listOfHighScores.setAttribute("style", "font-family: 'Archivo', sans-serif; font-style: italic;")
+  listOfScores.innerHTML = "History of scores deleted!";
+  listOfScores.setAttribute("style", "font-family: 'Archivo', sans-serif; font-style: italic;")
 });
